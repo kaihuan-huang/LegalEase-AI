@@ -21,37 +21,16 @@ const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
 const config = require('./config');
-const SPONSORS_LIST = ["yinali***", "**华", "Z*d", "*泉", "阿*y"];
 
-function Notices() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openSponsorsList = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <Message type={"info"}>
-      {
-        "大家好！我是袁先。很高兴这个项目能够帮助到大家。目前，AI 维权律师每天为大家生成 200+ 封起诉书，但是这也意味着耗费数十万的 tokens。由于运营成本较高，不得不做出一些限制：每日提供最高 5 美元额度的服务，用完后会暂停服务，直到次日 10 点左右再次恢复（特殊情况除外）。同时，也开通了捐赠渠道，希望大家能支持这个项目，让更多人可以长期受益。谢谢！"
-      }
-      <a href="/reward.jpg">👉 点击捐赠 ❤️</a>
-      <a href="javascript:void(0)" onClick={openSponsorsList}>
-        {" 捐赠列表 ❤️"}
-      </a>
-      <Modal open={isOpen} onClose={openSponsorsList}>
-        <Modal.Header>
-          <Modal.Title>捐赠者列表</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {SPONSORS_LIST.map((Rewarder) => (
-            <p>{`@${Rewarder}`}</p>
-          ))}
-        </Modal.Body>
-      </Modal>
-    </Message>
-  );
-}
+// Localization (can be further enhanced with a proper i18n solution)
+const TEXTS = {
+  CASE_DETAILS: "Case Details:",
+  APPEAL: "Appeal:",
+  GENERATE_INDICTMENT: "Generate Indictment",
+  CLEAR_DATA: "Clear Data",
+  // ... add other texts
+OTHER_TEXT: "Other Text",
+};
 
 export default function Home() {
   const [fact, setFact] = useState("");
@@ -65,7 +44,7 @@ export default function Home() {
   function Example() {
     return (
       <div className={styles.example}>
-        <div className={styles["example-label"]}>For example：</div>
+        <div className={styles["example-label"]}>For example</div>
         <div className={styles["example-container"]}>
           {EXAMPLE.map(({ type, fact, appeal }) => (
             <Button
@@ -82,8 +61,9 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (location.hostname === "ai-lawyer.yuanx.me") {
-      const ackeeServer = "https://ackee.yuanx.me";
+     // Set up ackeeTracker for analytics
+    if (location.hostname === "") {
+      const ackeeServer = "";
       setAckeeServer(ackeeServer);
       setACKEE(
         ackeeTracker.create(ackeeServer, {
@@ -192,8 +172,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AI 维权律师</title>
-        <meta name="description" content="AI 维权律师" />
+        <title>LegalEase AI</title>
+        <meta name="description" content="LegalEaseAI" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         {ackeeServer && (
@@ -208,26 +188,26 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.config}>
-          <h1 className={styles.title}>AI 维权律师</h1>
+          <h1 className={styles.title}>LegalEase AI</h1>
           <Notices />
           <Form fluid className={styles.form}>
             <Form.Group controlId="textarea">
-              <Form.ControlLabel>事实经过：</Form.ControlLabel>
+              <Form.ControlLabel>Case Details:</Form.ControlLabel>
               <Form.Control
                 name="textarea"
                 accepter={Textarea}
                 value={fact}
-                placeholder={`例：${EXAMPLE[0].fact}`}
+              placeholder={`For example：${EXAMPLE[0].fact}`}
                 onChange={factChange}
               />
             </Form.Group>
             <Form.Group controlId="textarea">
-              <Form.ControlLabel>诉求：</Form.ControlLabel>
+              <Form.ControlLabel>Appeal:</Form.ControlLabel>
               <Form.Control
                 name="textarea"
                 accepter={Textarea}
                 value={appeal}
-                placeholder={`例：${EXAMPLE[0].appeal}`}
+                placeholder={`For example:${EXAMPLE[0].appeal}`}
                 onChange={appealChange}
               />
             </Form.Group>
@@ -235,18 +215,18 @@ export default function Home() {
               <Example />
             </Form.Group>
             <Form.Group>
-              <ButtonToolbar>
-                <Button
-                  loading={loading}
-                  appearance="primary"
-                  onClick={generateIndictment}
-                >
-                  生成起诉书
-                </Button>
-                <Button appearance="default" onClick={cleanForm}>
-                  清除数据
-                </Button>
-              </ButtonToolbar>
+            <ButtonToolbar>
+            <Button
+              loading={loading}
+              appearance="primary"
+              onClick={generateIndictment}
+            >
+              {TEXTS.GENERATE_INDICTMENT}
+            </Button>
+            <Button appearance="default" onClick={cleanForm}>
+              {TEXTS.CLEAR_DATA}
+            </Button>
+          </ButtonToolbar>
             </Form.Group>
             <Form.Group>
               <div className={styles.tips}>
