@@ -20,7 +20,7 @@ import EXAMPLE from "../../example";
 const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
-
+const config = require('./config');
 const SPONSORS_LIST = ["yinali***", "**华", "Z*d", "*泉", "阿*y"];
 
 function Notices() {
@@ -65,7 +65,7 @@ export default function Home() {
   function Example() {
     return (
       <div className={styles.example}>
-        <div className={styles["example-label"]}>例：</div>
+        <div className={styles["example-label"]}>For example：</div>
         <div className={styles["example-container"]}>
           {EXAMPLE.map(({ type, fact, appeal }) => (
             <Button
@@ -266,14 +266,14 @@ export default function Home() {
           />
         </div>
         <Footer className={styles.footer}>
-          {"yuanx @ "}
-          <a href="https://github.com/imyuanx" target="_blank">
-            GitHub
-          </a>
-          {" | "}
-          <a href="https://twitter.com/imyuanx" target="_blank">
-            Twitter
-          </a>
+          {/* {"yuanx @ "} */}
+          {/* <a href="https://github.com/imyuanx" target="_blank"> */}
+            {/* GitHub */}
+          {/* </a> */}
+          {/* {" | "} */}
+          {/* <a href="https://twitter.com/imyuanx" target="_blank"> */}
+            {/* Twitter */}
+          {/* </a> */}
         </Footer>
       </main>
     </>

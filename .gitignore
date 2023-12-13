@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+#keys
+.env
 # Logs
 logs
 *.log

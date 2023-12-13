@@ -3,7 +3,7 @@ export const config = { runtime: "edge" };
 import { createParser } from "eventsource-parser";
 import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
-
+// Access the API key from environment variables
 const OPENAI_API_KEY = (process.env.OPENAI_API_KEY as string) || "";
 
 export type GenerateIndictmentBody = {
@@ -28,7 +28,7 @@ async function OpenAIStream(payload: OpenAIStreamPayload) {
   const decoder = new TextDecoder();
 
   let counter = 0;
-
+// In the fetch call within the OpenAIStream function
   const res = await fetch("https://api.openai.com/v1/completions", {
     headers: {
       "Content-Type": "application/json",
