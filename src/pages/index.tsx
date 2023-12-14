@@ -32,6 +32,8 @@ const TEXTS = {
 OTHER_TEXT: "Other Text",
 };
 
+
+
 export default function Home() {
   const [fact, setFact] = useState("");
   const [appeal, setAppeal] = useState("");
@@ -123,13 +125,13 @@ export default function Home() {
           if (done) break;
         }
       } catch (err) {
-        error = "生成失败，请重试！";
+        error = "Error: " + err;
       }
     } else {
-      error = "生成失败，请重试！";
+      error = "Error: " + res.statusText;
     }
     toaster.push(
-      MyMessage(error || "生成完成，祝好", error ? "error" : "success"),
+      MyMessage(error || "Success", error ? "error" : "success"),
       {
         placement: "topCenter",
         duration: 2000,
@@ -231,7 +233,7 @@ export default function Home() {
             <Form.Group>
               <div className={styles.tips}>
                 {
-                  "小提示：尽量不要使用个人真实信息，可以使用 “x 先生 / 女士” 等方式代替"
+                  TEXTS.TIPS
                 }
               </div>
             </Form.Group>
@@ -240,7 +242,7 @@ export default function Home() {
         <div className={styles.output}>
           <Input
             as="textarea"
-            placeholder="等待生成起诉书..."
+            placeholder="Indictment"
             value={indictment}
             onChange={indictmentChange}
           />
